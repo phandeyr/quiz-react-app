@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { entities } from '../helpers/utils.js'
+import shuffle from 'shuffle-array'
 
 class Quiz extends Component {
   constructor (props) {
@@ -23,7 +24,7 @@ class Quiz extends Component {
       .then((data) => {
         this.setState({
           questions: data,
-          answerOptions: [...data.results[this.state.currentQuestion].incorrect_answers, data.results[this.state.currentQuestion].correct_answer],
+          answerOptions: shuffle([...data.results[this.state.currentQuestion].incorrect_answers, data.results[this.state.currentQuestion].correct_answer]),
           isLoading: false,
           isLastQuestion: false
         })
@@ -39,7 +40,7 @@ class Quiz extends Component {
     if (this.state.currentQuestion !== 9) {
       this.setState({
         currentQuestion: this.state.currentQuestion + 1,
-        answerOptions: [...this.state.questions.results[this.state.currentQuestion + 1].incorrect_answers, this.state.questions.results[this.state.currentQuestion + 1].correct_answer]
+        answerOptions: shuffle([...this.state.questions.results[this.state.currentQuestion + 1].incorrect_answers, this.state.questions.results[this.state.currentQuestion + 1].correct_answer])
       })
     } else {
       this.setState({ isLastQuestion: true })
