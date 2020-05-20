@@ -1,0 +1,23 @@
+env:
+  browser: true
+parserOptions: {
+  ecmaVersion: 11,
+  sourceType: module,
+  ecmaFeatures: {
+    jsx: true
+  }
+}
+rules: {
+  quotes: [2, "single"],
+  no-irregular-whitespace: 2,
+  no-undef: 2,
+  keyword-spacing: 2,
+  comma-spacing: 2,
+  object-curly-spacing: [2, always, { "objectsInObjects": true} ],
+  space-before-function-paren: 2,
+  eol-last: 2,
+  eqeqeq: 2,
+  key-spacing: 2,
+  no-trailing-spaces: 2,
+  semi: [2, never]
+}

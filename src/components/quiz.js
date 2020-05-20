@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { entities } from '../utils.js'
+import { entities } from '../helpers/utils.js'
 
 class Quiz extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       questions: [],
@@ -13,15 +13,14 @@ class Quiz extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getQuestions()
   }
 
-  getQuestions() {
+  getQuestions () {
     fetch(`https://opentdb.com/api.php?amount=10&category=${this.props.categoryNum}&type=multiple`)
       .then(res => res.json())
       .then((data) => {
-        console.log(data)
         this.setState({
           questions: data,
           answerOptions: [...data.results[this.state.currentQuestion].incorrect_answers, data.results[this.state.currentQuestion].correct_answer],
@@ -29,16 +28,16 @@ class Quiz extends Component {
           isLastQuestion: false
         })
       })
-      .catch(console.log)    
+      .catch(console.log)
   }
 
-  handleAnswer(chosen,correct) {
+  handleAnswer (chosen, correct) {
     if (chosen === correct) {
       this.setState({ result: this.state.result + 1 })
     }
 
     if (this.state.currentQuestion !== 9) {
-      this.setState({ 
+      this.setState({
         currentQuestion: this.state.currentQuestion + 1,
         answerOptions: [...this.state.questions.results[this.state.currentQuestion + 1].incorrect_answers, this.state.questions.results[this.state.currentQuestion + 1].correct_answer]
       })
@@ -47,7 +46,7 @@ class Quiz extends Component {
     }
   }
 
-  render() {
+  render () {
     if (this.state.isLoading) {
       return 'Quiz loading'
     }
@@ -55,12 +54,12 @@ class Quiz extends Component {
     if (this.state.isLastQuestion) {
       this.props.handleState('result', null, this.state.result)
     }
-    
-    return(
+
+    return (
       <div>
         <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
         <h5>{this.state.answerOptions.map((item, index) =>
-            <li onClick={()=>this.handleAnswer(item,this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item}</li>
+            <li onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item}</li>
           )}
         </h5>
       </div>

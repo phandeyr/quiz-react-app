@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class Category extends Component {
-  render() {
+  render () {
     return (
       <div>
         <p onClick={()=>this.props.handleState('quiz', 11)}>Film</p>
