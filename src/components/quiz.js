@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { entities } from '../helpers/utils.js'
+import { Button, Icon } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
+import { entities } from '../common/utils.js'
 import shuffle from 'shuffle-array'
+import QuizHeader from './header.js'
 
 class Quiz extends Component {
   constructor (props) {
@@ -49,7 +52,13 @@ class Quiz extends Component {
 
   render () {
     if (this.state.isLoading) {
-      return 'Quiz loading'
+      return (
+        <div className='category-container'>
+          <QuizHeader/><br/>
+          <Icon className='spinner icon' size='big'/><br/>
+          <p>Loading</p>
+        </div>
+      )
     }
 
     if (this.state.isLastQuestion) {
@@ -57,12 +66,15 @@ class Quiz extends Component {
     }
 
     return (
-      <div>
-        <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
-        <h5>{this.state.answerOptions.map((item, index) =>
-            <li onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item}</li>
-          )}
-        </h5>
+      <div className='category-container'>
+        <QuizHeader/><br/>
+        <div>
+          <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
+          <h5>{this.state.answerOptions.map((item, index) =>
+              <Button className='answer-options' onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item.replace(/&#?\w+;/gi, match => entities[match])}</Button>
+            )}
+          </h5>
+        </div>
       </div>
     )
   }
