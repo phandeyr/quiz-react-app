@@ -59,7 +59,6 @@ class Quiz extends Component {
   }
 
   render () {
-    console.log(this.state.answerOptions)
     if (this.state.isLoading) {
       return (
         <div className='container'>
