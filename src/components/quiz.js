@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { entities } from '../common/utils.js'
 import shuffle from 'shuffle-array'
 import QuizHeader from './header.js'
+import Answer from './answer.js'
 
 class Quiz extends Component {
   constructor (props) {
@@ -13,7 +14,10 @@ class Quiz extends Component {
       answerOptions: [],
       isLoading: true,
       currentQuestion: 0,
-      result: 0
+      result: 0,
+      isSelected: false,
+      chosen: '',
+      correct: ''
     }
   }
 
@@ -36,24 +40,29 @@ class Quiz extends Component {
   }
 
   handleAnswer (chosen, correct) {
+    this.setState({ isSelected: true, chosen: chosen, correct: correct })
     if (chosen === correct) {
       this.setState({ result: this.state.result + 1 })
     }
 
-    if (this.state.currentQuestion !== 9) {
-      this.setState({
-        currentQuestion: this.state.currentQuestion + 1,
-        answerOptions: shuffle([...this.state.questions.results[this.state.currentQuestion + 1].incorrect_answers, this.state.questions.results[this.state.currentQuestion + 1].correct_answer])
-      })
-    } else {
-      this.setState({ isLastQuestion: true })
-    }
+    setTimeout(() => {
+     if (this.state.currentQuestion !== 9) {
+        this.setState({
+         currentQuestion: this.state.currentQuestion + 1,
+          answerOptions: shuffle([...this.state.questions.results[this.state.currentQuestion + 1].incorrect_answers, this.state.questions.results[this.state.currentQuestion + 1].correct_answer]),
+          isSelected: false
+        })
+      } else {
+        this.setState({ isLastQuestion: true })
+      }
+    }, 3000)
   }
 
   render () {
+    console.log(this.state.answerOptions)
     if (this.state.isLoading) {
       return (
-        <div className='category-container'>
+        <div className='container'>
           <QuizHeader/><br/>
           <Icon className='spinner icon' size='big'/><br/>
           <p>Loading</p>
@@ -65,15 +74,26 @@ class Quiz extends Component {
       this.props.handleState('result', null, this.state.result)
     }
 
+    if (this.state.isSelected) {
+      return (
+        <div className='container'>
+          <QuizHeader/>
+          <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
+          <Answer
+                chosen={this.state.chosen}
+                correct={this.state.correct} />
+        </div>
+      )
+    }
+
     return (
-      <div className='category-container'>
+      <div className='container'>
         <QuizHeader/><br/>
         <div>
           <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
-          <h5>{this.state.answerOptions.map((item, index) =>
-              <Button className='answer-options' onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item.replace(/&#?\w+;/gi, match => entities[match])}</Button>
+            {this.state.answerOptions.map((item, index) =>
+              <Button className='quiz-buttons' onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item.replace(/&#?\w+;/gi, match => entities[match])}</Button>
             )}
-          </h5>
         </div>
       </div>
     )

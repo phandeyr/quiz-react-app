@@ -6,12 +6,12 @@ import QuizHeader from './header.js'
 class Category extends Component {
   render () {
     return (
-      <div className='category-container'>
+      <div className='container'>
         <QuizHeader/><br/>
         <div className='category'>
           <h4>Select a category</h4>
-          <Button onClick={()=>this.props.handleState('quiz', 11)}><Icon className='film icon'/>Film</Button><p></p>
-          <Button onClick={()=>this.props.handleState('quiz', 22)}><Icon className='world icon'/>Geography</Button>
+          <Button className='quiz-buttons' onClick={()=>this.props.handleState('quiz', 11)}><Icon className='film icon' size='large'/>Film</Button><p></p>
+          <Button className='quiz-buttons' onClick={()=>this.props.handleState('quiz', 22)}><Icon className='world icon' size='large'/>Geography</Button>
         </div>
       </div>
     )

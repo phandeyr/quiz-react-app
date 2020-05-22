@@ -5,11 +5,11 @@ import QuizHeader from './header.js'
 class QuizResult extends Component{
   render () {
     return (
-      <div className='category-container'>
+      <div className='container'>
         <QuizHeader/><br/>
         <div>
-          <p>{`Quiz Result: ${this.props.result}/10`}</p>
-          <Button onClick={()=>this.props.handleState('category')}><Icon className='redo icon'/>Take Quiz Again</Button>
+          <h5>{`Quiz Result: ${this.props.result}/10`}</h5>
+          <Button className='quiz-buttons' onClick={()=>this.props.handleState('category')}><Icon className='redo icon'/>Take Quiz Again</Button>
         </div>
       </div>
     )

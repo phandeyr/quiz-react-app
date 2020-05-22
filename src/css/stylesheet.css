@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.category-container {
+.container {
   text-align: center;
 }
 
@@ -19,9 +19,11 @@ body {
   border-radius: 25px;
 }
 
-.ui.button {
+button.ui.button {
   border-radius: 12px;
   width: 250px;
+  vertical-align: top;
+  padding: 0;
 }
 
 .ui.button:hover{
@@ -37,6 +39,14 @@ body {
   overflow: hidden;
 }
 
-.answer-options {
-  height:150px
+.quiz-buttons {
+  height:50px;
+}
+
+.ui.button#correct-answer {
+  background-color: #b1eb34;
+}
+
+.ui.button#incorrect-answer {
+  background-color: red;
 }
