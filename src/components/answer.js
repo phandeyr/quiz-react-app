@@ -12,7 +12,7 @@ class Answer extends Component {
       return (
         <div>
           {this.props.chosen !== this.props.correct}
-          <Button id='incorrect-answer' className='quiz-buttons'>{this.props.chosen}</Button>
+          <Button id='incorrect-answer' className='quiz-buttons'>{this.props.chosen}</Button><p></p>
           <Button id='correct-answer' className='quiz-buttons'>{this.props.correct}</Button>
         </div>
       )

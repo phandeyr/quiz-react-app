@@ -86,7 +86,12 @@ class Quiz extends Component {
       <div>
         <h4>{formatString(this.state.questions.results[this.state.currentQuestion].question)}</h4>
           {this.state.answerOptions.map((item, index) =>
-            <Button className='quiz-buttons' onClick={()=>this.handleAnswer(formatString(item), formatString(this.state.questions.results[this.state.currentQuestion].correct_answer))} key={index}>{formatString(item)}</Button>
+            <div>
+              <div>
+                <Button className='quiz-buttons' onClick={()=>this.handleAnswer(formatString(item), formatString(this.state.questions.results[this.state.currentQuestion].correct_answer))} key={index}>{formatString(item)}</Button>
+              </div>
+              <br/>
+            </div>
           )}
       </div>
     )
