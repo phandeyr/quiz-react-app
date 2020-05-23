@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import { entities } from '../common/utils.js'
+import formatString from '../common/utils.js'
 import shuffle from 'shuffle-array'
-import QuizHeader from './header.js'
 import Answer from './answer.js'
 
 class Quiz extends Component {
@@ -55,14 +54,13 @@ class Quiz extends Component {
       } else {
         this.setState({ isLastQuestion: true })
       }
-    }, 3000)
+    }, 2500)
   }
 
   render () {
     if (this.state.isLoading) {
       return (
-        <div className='container'>
-          <QuizHeader/><br/>
+        <div>
           <Icon className='spinner icon' size='big'/><br/>
           <p>Loading</p>
         </div>
@@ -75,9 +73,8 @@ class Quiz extends Component {
 
     if (this.state.isSelected) {
       return (
-        <div className='container'>
-          <QuizHeader/>
-          <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
+        <div>
+          <h4>{formatString(this.state.questions.results[this.state.currentQuestion].question)}</h4>
           <Answer
                 chosen={this.state.chosen}
                 correct={this.state.correct} />
@@ -86,14 +83,11 @@ class Quiz extends Component {
     }
 
     return (
-      <div className='container'>
-        <QuizHeader/><br/>
-        <div>
-          <h4>{this.state.questions.results[this.state.currentQuestion].question.replace(/&#?\w+;/gi, match => entities[match])}</h4>
-            {this.state.answerOptions.map((item, index) =>
-              <Button className='quiz-buttons' onClick={()=>this.handleAnswer(item, this.state.questions.results[this.state.currentQuestion].correct_answer)} key={index}>{item.replace(/&#?\w+;/gi, match => entities[match])}</Button>
-            )}
-        </div>
+      <div>
+        <h4>{formatString(this.state.questions.results[this.state.currentQuestion].question)}</h4>
+          {this.state.answerOptions.map((item, index) =>
+            <Button className='quiz-buttons' onClick={()=>this.handleAnswer(formatString(item), formatString(this.state.questions.results[this.state.currentQuestion].correct_answer))} key={index}>{formatString(item)}</Button>
+          )}
       </div>
     )
   }

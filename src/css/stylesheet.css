@@ -24,10 +24,11 @@ button.ui.button {
   width: 250px;
   vertical-align: top;
   padding: 0;
+  background-color: #3399ff;
 }
 
-.ui.button:hover{
-  background-color: #dfe0ec;
+button.ui.button:hover{
+  background-color: #0080ff;
 }
 
 .header {

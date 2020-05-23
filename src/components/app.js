@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Category from './category.js'
 import Quiz from './quiz.js'
 import QuizResult from './result.js'
+import QuizHeader from './header.js'
 
 class App extends Component {
   constructor (props) {
@@ -20,15 +21,30 @@ class App extends Component {
 
   render () {
     if (this.state.display === 'category' ) {
-      return <Category handleState={this.handleState}/>
+      return (
+        <div className='container'>
+          <QuizHeader/><br/>
+          <Category handleState={this.handleState}/>
+        </div>
+      )
     }
 
     if (this.state.display === 'quiz') {
-      return <Quiz handleState={this.handleState} categoryNum={this.state.categoryNum}/>
+      return (
+        <div className='container'>
+          <QuizHeader/><br/>
+          <Quiz handleState={this.handleState} categoryNum={this.state.categoryNum}/>
+        </div>
+      )
     }
 
     if (this.state.display === 'result') {
-      return <QuizResult handleState={this.handleState} result={this.state.result}/>
+      return (
+        <div className='container'>
+          <QuizHeader/><br/>
+          <QuizResult handleState={this.handleState} result={this.state.result}/>
+        </div>
+      )
     }
   }
 
