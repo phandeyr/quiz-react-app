@@ -3,10 +3,6 @@ import { Button } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 class Answer extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     if (this.props.chosen !== this.props.correct) {
       return (
