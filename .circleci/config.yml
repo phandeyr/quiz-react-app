@@ -21,6 +21,5 @@ workflows:
       - build:
           filters:
             branches:
-              only: 
-                - develop
-                - master
+              ignore:
+                - gh-pages
