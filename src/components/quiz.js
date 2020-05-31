@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import formatString from '../common/utils.js'
 import shuffle from 'shuffle-array'
 import Answer from './answer.js'
+import QuestionNumber from './question_number.js'
 
 class Quiz extends Component {
   constructor (props) {
@@ -74,6 +75,8 @@ class Quiz extends Component {
     if (this.state.isSelected) {
       return (
         <div>
+          <QuestionNumber
+            questionNumber={this.state.currentQuestion + 1} />
           <h4>{formatString(this.state.questions.results[this.state.currentQuestion].question)}</h4>
           <Answer
                 chosen={this.state.chosen}
@@ -84,6 +87,8 @@ class Quiz extends Component {
 
     return (
       <div>
+        <QuestionNumber
+          questionNumber={this.state.currentQuestion + 1} />
         <h4>{formatString(this.state.questions.results[this.state.currentQuestion].question)}</h4>
           {this.state.answerOptions.map((item, index) =>
             <div>
