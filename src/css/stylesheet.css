@@ -15,18 +15,18 @@ body {
   border-radius: 25px;
   border: 1px solid #000000;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  width: 50%;
+  width: 80%;
   margin: auto;
   padding: 1rem;
 }
 
 .component-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-button.ui.button, button.ui.button:focus {
+button.ui.button {
   border-radius: 50px;
   background: #ffffff;
   border: 2px solid #7700c7;
@@ -37,6 +37,19 @@ button.ui.button, button.ui.button:focus {
 button.ui.button:hover {
   background-color: #7700c7;
   color: #ffffff;
+}
+
+button.ui.button:focus {
+  background-color: #ffffff;
+  color: #7700c7;
+}
+
+button.ui.button#correct-answer {
+  background-color: #b1eb34;
+}
+
+button.ui.button#incorrect-answer {
+  background-color: red;
 }
 
 .header {
@@ -59,12 +72,4 @@ button.ui.button:hover {
 
 .quiz-buttons {
   height:50px;
-}
-
-.ui.button#correct-answer {
-  background-color: #b1eb34;
-}
-
-.ui.button#incorrect-answer {
-  background-color: red;
 }

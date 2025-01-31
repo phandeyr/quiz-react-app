@@ -39,15 +39,25 @@ class App extends Component {
     }
 
     if (this.state.display === 'result') {
+      const result = {
+        result: this.state.result
+      }
+      if (this.state.result <= 2) {
+        result.variant = { error: 'error' }
+      } else if (this.state.result <= 5) {
+        result.variant = { warning: 'warning' }
+      } else {
+        result.variant = { success: 'success' }
+      }
+
       return (
         <div className='container'>
           <QuizHeader/><br/>
-          <QuizResult handleState={this.handleState} result={this.state.result}/>
+          <QuizResult handleState={this.handleState} result={result}/>
         </div>
       )
     }
   }
-
 }
 
 export default App
